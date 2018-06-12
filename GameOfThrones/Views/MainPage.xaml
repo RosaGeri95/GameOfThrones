@@ -1,0 +1,102 @@
+﻿<Page x:Class="GameOfThrones.Views.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Template10.Controls"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:vm="using:GameOfThrones.ViewModels" 
+      mc:Ignorable="d">
+
+    <Page.DataContext>
+        <vm:MainPageViewModel x:Name="ViewModel" />
+    </Page.DataContext>
+
+    <StackPanel Spacing="50">
+        <StackPanel.Background>
+            <ImageBrush ImageSource="/Assets/background.jpg"/>
+        </StackPanel.Background>
+
+        <controls:PageHeader x:Name="pageHeader">
+            <controls:PageHeader.Background>
+                <ImageBrush ImageSource="/Assets/logo.png"/>
+            </controls:PageHeader.Background>
+        </controls:PageHeader>
+
+        <Button Height="150"
+                Width="700" 
+                HorizontalAlignment="Center"
+                BorderBrush="Red"
+                BorderThickness="3"
+                Command="{Binding CharacterCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+            <RelativePanel Width="680">
+                <Image Source="/Assets/characters.jpg" x:Name="charactersImage"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    Margin="10"/>
+                <TextBlock Text="Characters"
+                    FontStyle="Oblique"
+                    FontFamily="League Gothic"
+                    FontSize="60"
+                    Foreground="Red"
+                    Margin="30"
+                    HorizontalTextAlignment="Center"
+                    RelativePanel.RightOf="charactersImage"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            </RelativePanel>
+        </Button>
+        <Button Height="150"
+                Width="700" 
+                HorizontalAlignment="Center"
+                BorderBrush="Red"
+                BorderThickness="3"
+                Command="{Binding HouseCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+            <RelativePanel Width="680">
+                <Image Source="/Assets/houses.png" x:Name="housesImage"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    Margin="10"/>
+                <TextBlock Text="Houses"
+                    FontStyle="Oblique"
+                    FontFamily="League Gothic"
+                    FontSize="60"
+                    Foreground="Red"
+                    Margin="30"
+                    HorizontalTextAlignment="Center"
+                    RelativePanel.RightOf="housesImage"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            </RelativePanel>
+        </Button>
+        <Button Height="150"
+                Width="700" 
+                HorizontalAlignment="Center"
+                BorderBrush="Red"
+                BorderThickness="3"
+                Command="{Binding BookCommand}">
+            <Button.Background>
+                <SolidColorBrush Opacity="0"/>
+            </Button.Background>
+            <RelativePanel Width="680">
+                <Image Source="/Assets/book_cover.jpg" x:Name="booksImage"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignTopWithPanel="True"
+                    Margin="10"/>
+                <TextBlock Text="Books"
+                    FontStyle="Oblique"
+                    FontFamily="League Gothic"
+                    FontSize="60"
+                    Foreground="Red"
+                    Margin="30"
+                    HorizontalTextAlignment="Center"
+                    RelativePanel.RightOf="booksImage"
+                    RelativePanel.AlignHorizontalCenterWithPanel="True"
+                    RelativePanel.AlignVerticalCenterWithPanel="True"/>
+            </RelativePanel>
+        </Button>
+    </StackPanel>
+</Page>

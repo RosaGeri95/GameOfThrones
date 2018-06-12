@@ -1,0 +1,118 @@
+﻿<Page
+    x:Class="GameOfThrones.Views.CharactersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GameOfThrones.ViewModels"
+    xmlns:cv="using:GameOfThrones.Converters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:Template10.Controls"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <local:CharactersPageViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <cv:EmptyStringConverter x:Key="StringConverter"/>
+    </Page.Resources>
+
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="Red">
+            <TextBlock Text="Characters"
+                               FontStyle="Oblique"
+                               FontFamily="League Gothic"
+                               FontSize="60"
+                               Foreground="LightBlue"
+                               HorizontalTextAlignment="Center"/>
+        </Border>
+        <StackPanel Orientation="Vertical" Grid.Row="1" Grid.Column="0">
+            <Image Source="/Assets/characters.jpg" Margin="0 50 0 50"/>
+            <TextBox Text="{Binding SearchText, Mode=TwoWay}" 
+                     Foreground="Red"
+                     PlaceholderText="search name"
+                     Margin="0 0 0 25"/>
+            <Button 
+                HorizontalAlignment="Center"
+                Content="Search"
+                Command="{Binding SearchCommand}">
+                <Button.Background>
+                    <SolidColorBrush Opacity="0"/>
+                </Button.Background>
+            </Button>
+        </StackPanel>
+        
+        <RelativePanel Height="75" Grid.Column="1" Grid.Row="0" Background="LightBlue">
+            <Button Width="75"
+                    Height="75"
+                    Command="{Binding PageLeftCommand}"
+                    RelativePanel.AlignLeftWithPanel="False">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Assets/left.png"/>
+                </Button.Background>
+            </Button>
+            <TextBlock Height="75"
+                       HorizontalTextAlignment="Center"
+                        RelativePanel.AlignHorizontalCenterWithPanel="True">
+                <Run  FontStyle="Oblique"
+                        FontFamily="League Gothic"
+                        FontSize="60"
+                        Foreground="Red"
+                        Text="{Binding PageCount}"/>
+                <Run Text="/43 page"
+                      FontStyle="Oblique"
+                        FontFamily="League Gothic"
+                        FontSize="60"
+                        Foreground="Red"/>
+            </TextBlock>
+            <Button Width="75"
+                    Height="75"
+                    RelativePanel.AlignRightWithPanel="True"
+                    Command="{Binding PageRightCommand}">
+                <Button.Background>
+                    <ImageBrush ImageSource="/Assets/right.png"/>
+                </Button.Background>
+            </Button>
+        </RelativePanel>
+        <ListView ItemsSource="{Binding Characters}" 
+                  SelectedItem="{Binding SelectedCharacter, Mode=TwoWay}"
+                  Grid.Row="1" Grid.Column="1"
+                  BorderBrush="Yellow" BorderThickness="3">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                <Grid BorderBrush="Red" BorderThickness="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="4*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Text="Name: " Margin="30 0 30 0"/>
+                        <TextBlock Text="{Binding Name}" Margin="30 0 30 0" Grid.Column="1"/>
+                        <TextBlock Text="Gender: " Margin="30 0 30 0" Grid.Row="1"/>
+                        <TextBlock Text="{Binding Gender}" Margin="30 0 30 0" Grid.Column="1" Grid.Row="1"/>
+                        <TextBlock Text="Culture: " Margin="30 0 30 0" Grid.Row="2"/>
+                        <TextBlock Text="{Binding Culture, Converter={StaticResource StringConverter}}" Margin="30 0 30 0" Grid.Column="1" Grid.Row="2"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
